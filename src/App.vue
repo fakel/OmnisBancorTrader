@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <BancorWidget tokenReceive="OMNIS" />
+    <Chart :value="value" />
     <DataTable :transactions="transactions" />
   </div>
 </template>
@@ -11,6 +12,7 @@ import BancorConversionWidget from 'bancor-conversion-widget';
 import Eth from 'ethjs-query';
 import EthFilter from 'ethjs-filter';
 import DataTable from './components/DataTable.vue';
+import Chart from './components/Chart.vue';
 
 let provider;
 let eth;
@@ -25,13 +27,16 @@ export default {
   data() {
     return {
       txFilter: null,
-      transactions: []
+      txFilter2: null,
+      transactions: [],
+      value: []
     };
   },
   name: 'app',
   components: {
     BancorWidget: toVue(BancorConversionWidget, baseStyle, 'div'),
-    DataTable
+    DataTable,
+    Chart
   },
   beforeMount() {
     if (typeof window.ethereum !== 'undefined') {
@@ -58,6 +63,29 @@ export default {
                 block: element.blockNumber.toString()
               };
               this.transactions.push(tx);
+            });
+          });
+        })
+        .catch();
+
+      this.txFilter2 = new filters.Filter({ delay: 300 })
+        .new({
+          fromBlock: 9269547,
+          toBlock: 'latest',
+          address: '0x8e748dc7b9dab8bf9ef4b84c5f38a6ae954096e0',
+          topics: [
+            '0x8a6a7f53b3c8fa1dc4b83e3f1be668c1b251ff8d44cdcb83eb3acec3fec6a788',
+            '0x0000000000000000000000002b17b8927a8e9844b6ca11c5e0e818bb633c044d',
+            null
+          ]
+        })
+        .then(res => {
+          eth.getFilterLogs(res).then(result => {
+            result.forEach(element => {
+              const smartSupply = parseInt(`0x${element.data.substring(2, 66)}`, 16) / 1e18;
+              const reserve = parseInt(`0x${element.data.substring(66, 130)}`, 16) / 1e18;
+              const ratio = parseInt(`0x${element.data.substring(130, 194)}`, 16) / 1e6;
+              this.value.push(parseFloat(((smartSupply * ratio) / reserve).toFixed(3)));
             });
           });
         })
