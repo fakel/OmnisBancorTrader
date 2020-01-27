@@ -13,11 +13,13 @@
       :auto-line-width="autoLineWidth"
       :show-labels="showLabels"
       :label-size="3"
+      color="white"
       auto-draw
     >
+      <template v-slot:label="item"> {{ item.value }} </template>
     </v-sparkline>
     <v-card-text>
-      <div class="display-1 font-weight-thin">Price evolution</div>
+      <div class="display-1 font-weight-thin" style="color:white">Price evolution</div>
     </v-card-text>
   </v-container>
 </template>

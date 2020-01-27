@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <BancorWidget tokenReceive="OMNIS" />
+    <BancorWidget tokenReceive="OMNIS" :colors="colors" />
     <Chart :value="value" />
     <DataTable :transactions="transactions" />
   </div>
@@ -29,7 +29,24 @@ export default {
       txFilter: null,
       txFilter2: null,
       transactions: [],
-      value: []
+      value: [],
+      colors: {
+        containerBg: 'white',
+        containerFont: 'black',
+        topTokenBg: '#0D1A2C',
+        topTokenFont: 'white',
+        bottomTokenBg: 'white',
+        bottomTokenFont: 'black',
+        summaryBg: '#E1E1E1',
+        selectBorder: '#E1E1E1',
+        summaryFont: 'black',
+        disabledFont: '#787878',
+        buttonBg: '#0D1A2C',
+        buttonFont: 'white',
+        compareArrows: 'black',
+        hoverBackgroundColor: '#EDEDED',
+        successColor: '#0EAD00'
+      }
     };
   },
   name: 'app',
@@ -103,5 +120,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
 }
 </style>
