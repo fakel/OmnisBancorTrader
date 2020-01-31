@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <BancorWidget tokenReceive="OMNIS" :colors="colors" />
+    <v-btn @click="showConverter = true">Convert</v-btn>
+    <Modal v-if="showConverter" @close="showConverter = false">
+      <BancorWidget slot="body" class="modal-container" tokenReceive="OMNIS" :colors="colors" />
+    </Modal>
     <Chart :value="value" />
     <DataTable :transactions="transactions" />
   </div>
@@ -13,6 +16,7 @@ import Eth from 'ethjs-query';
 import EthFilter from 'ethjs-filter';
 import DataTable from './components/DataTable.vue';
 import Chart from './components/Chart.vue';
+import Modal from './components/Modal.vue';
 
 let provider;
 let eth;
@@ -26,6 +30,7 @@ const baseStyle = {
 export default {
   data() {
     return {
+      showConverter: false,
       txFilter: null,
       txFilter2: null,
       transactions: [],
@@ -53,7 +58,8 @@ export default {
   components: {
     BancorWidget: toVue(BancorConversionWidget, baseStyle, 'div'),
     DataTable,
-    Chart
+    Chart,
+    Modal
   },
   beforeMount() {
     if (typeof window.ethereum !== 'undefined') {
