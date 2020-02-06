@@ -16,11 +16,12 @@
       color="white"
       auto-draw
       id="graphic"
+      class="mx-auto"
     >
       <template v-slot:label="item"> {{ item.value }} </template>
     </v-sparkline>
     <v-card-text>
-      <div class="display-1 font-weight-thin" style="color:white">Price evolution</div>
+      <div class="display-1 font-weight-thin" style="color:black">Price evolution</div>
     </v-card-text>
   </v-container>
 </template>
@@ -55,8 +56,6 @@ export default {
 
 <style>
 #graphic {
-  margin: auto;
-  max-width: 800px;
   background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="d-flex flex-row justify-center">
-    <v-card max-width="500px" style="margin: auto">
+  <v-app id="app" class="d-flex">
+    <v-card class="mx-auto">
       <v-avatar color="white" size="62">
         <img src="./assets/smallomnislogo.png" alt="OMNIS" />
       </v-avatar>
@@ -14,7 +14,7 @@
     </Modal>
     <Chart :value="value" />
     <DataTable :transactions="transactions" />
-  </div>
+  </v-app>
 </template>
 
 <script>

@@ -3,8 +3,7 @@
     id="dataTable"
     :headers="headers"
     :items="transactions"
-    :items-per-page="5"
-    class="elevation-1"
+    class="elevation-3 mx-12"
   ></v-data-table>
 </template>
 
