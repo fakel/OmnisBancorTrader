@@ -1,6 +1,14 @@
 <template>
-  <div id="app">
-    <v-btn @click="showConverter = true">Convert</v-btn>
+  <div id="app" class="d-flex flex-row justify-center">
+    <v-card max-width="500px" style="margin: auto">
+      <v-avatar color="white" size="62">
+        <img src="./assets/smallomnislogo.png" alt="OMNIS" />
+      </v-avatar>
+      <p>Current Average Price ${{ value[value.length - 1] }}</p>
+      <v-btn min-height="20" elevation="24" outlined @click="showConverter = true">
+        Convert
+      </v-btn>
+    </v-card>
     <Modal v-if="showConverter" @close="showConverter = false">
       <BancorWidget slot="body" class="modal-container" tokenReceive="OMNIS" :colors="colors" />
     </Modal>
@@ -17,6 +25,7 @@ import EthFilter from 'ethjs-filter';
 import DataTable from './components/DataTable.vue';
 import Chart from './components/Chart.vue';
 import Modal from './components/Modal.vue';
+import officialTokens from './officialTokens';
 
 let provider;
 let eth;
@@ -54,6 +63,14 @@ export default {
       }
     };
   },
+  methods: {
+    getSymbol(address) {
+      const token = officialTokens.find(
+        el => el.tokenAddress.toLowerCase() === address.toLowerCase()
+      );
+      return token !== undefined ? token.symbol : 'Token Not Found';
+    }
+  },
   name: 'app',
   components: {
     BancorWidget: toVue(BancorConversionWidget, baseStyle, 'div'),
@@ -79,9 +96,9 @@ export default {
             this.transactions = [];
             result.forEach(element => {
               const tx = {
-                sendToken: `0x${element.topics[1].substring(26, 66)}`,
+                sendToken: this.getSymbol(`0x${element.topics[1].substring(26, 66)}`),
                 sendAmount: parseInt(`0x${element.data.substring(2, 66)}`, 16) / 1e18,
-                receiveToken: `0x${element.topics[2].substring(26, 66)}`,
+                receiveToken: this.getSymbol(`0x${element.topics[2].substring(26, 66)}`),
                 receiveAmount: parseInt(`0x${element.data.substring(66, 130)}`, 16) / 1e18,
                 block: element.blockNumber.toString()
               };
@@ -120,12 +137,12 @@ export default {
 
 <style>
 #app {
+  flex-direction: row;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
 }
 </style>

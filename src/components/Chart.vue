@@ -12,9 +12,10 @@
       :type="type"
       :auto-line-width="autoLineWidth"
       :show-labels="showLabels"
-      :label-size="3"
+      :label-size="4"
       color="white"
       auto-draw
+      id="graphic"
     >
       <template v-slot:label="item"> {{ item.value }} </template>
     </v-sparkline>
@@ -51,3 +52,11 @@ export default {
   props: ['value']
 };
 </script>
+
+<style>
+#graphic {
+  margin: auto;
+  max-width: 800px;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+}
+</style>

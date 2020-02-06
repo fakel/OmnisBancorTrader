@@ -1,5 +1,6 @@
 <template>
   <v-data-table
+    id="dataTable"
     :headers="headers"
     :items="transactions"
     :items-per-page="5"
