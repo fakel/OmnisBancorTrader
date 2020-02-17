@@ -11,6 +11,7 @@
     "@mdi/font": "^3.6.95",
     "bancor-conversion-widget": "^2.0.0",
     "ethjs-filter": "^0.1.8",
+    "ethjs-provider-http": "^0.1.6",
     "ethjs-query": "^0.3.8",
     "roboto-fontface": "*",
     "svelte-adapter": "^0.3.0",

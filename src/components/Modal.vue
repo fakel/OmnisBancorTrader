@@ -30,7 +30,8 @@ export default {};
 }
 
 .modal-container {
-  width: 100% !important;
+  transform: scale(0.7);
+  width: auto !important;
   margin: 0px auto;
   border-radius: 2px;
   transition: all 0.3s ease;
