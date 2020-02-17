@@ -13,7 +13,7 @@
       :auto-line-width="autoLineWidth"
       :show-labels="showLabels"
       :label-size="4"
-      color="white"
+      color="black"
       auto-draw
       id="graphic"
       class="mx-auto"
@@ -53,9 +53,3 @@ export default {
   props: ['value']
 };
 </script>
-
-<style>
-#graphic {
-  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-}
-</style>
