@@ -1,11 +1,11 @@
 <template>
-  <v-app id="app" class="d-flex">
-    <v-card class="mx-auto">
-      <v-avatar color="white" size="62">
+  <v-app id="app">
+    <v-card class="mx-12 d-flex justify-space-around">
+      <v-avatar color="white" size="62" class="my-auto">
         <img src="./assets/smallomnislogo.png" alt="OMNIS" />
       </v-avatar>
-      <p>Current Average Price ${{ value[value.length - 1] }}</p>
-      <v-btn min-height="20" elevation="24" outlined @click="showConverter = true">
+      <p class="my-auto">Current Average Price ${{ value[value.length - 1] }}</p>
+      <v-btn class="my-auto" min-height="20" outlined @click="showConverter = true">
         Convert
       </v-btn>
     </v-card>
